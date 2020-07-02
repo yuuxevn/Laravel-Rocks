@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->username === 'kridospace';  
     }
+
+    // public function gravatar($size = 150)
+    // {
+    //      return //buang variable gravatar, ganti email ke this->email
+    // }
 }

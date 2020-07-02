@@ -16,11 +16,6 @@ class PostController extends Controller
         return view('posts.index', compact('posts'));
     }
 
-    public function welcome()
-    {
-        return view('welcome');
-    }
-
     public function create()
     {
         return view('posts/create', [
@@ -98,9 +93,12 @@ class PostController extends Controller
     }
 
     public function destroy(Post $post)
-    {
-        \Storage::delete($post->thumbnail);
+    {   
         $this->authorize('delete', $post);
+        \Storage::delete($post->thumbnail);
+        $post->tags()->detach();
+        $post->delete();
+
         session()->flash('success', 'Post was destroyed');
         return redirect('posts');
     }

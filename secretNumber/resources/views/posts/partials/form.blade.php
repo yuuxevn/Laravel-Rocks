@@ -31,7 +31,7 @@
 </div>
 <div class="form-group">
     <label for="tags">Tags</label>
-    <select class="form-control" id="tags" name="tags[]" multiple>
+    <select class="form-control select2" id="tags" name="tags[]" multiple>
         @foreach($post->tags as $tag)
         <option selected value="{{ $tag->id }}">{{ $tag->name }}</option>
         @endforeach

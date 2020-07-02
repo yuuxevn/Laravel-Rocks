@@ -8,20 +8,35 @@
                 class="btn btn-dark">{{ $post->category->name }}</small> </a>
         &middot;
         @foreach($post->tags as $tag)
-        <a href="#">{{ $tag->name }}</a>
+        <a href="{{ route('tags.show', $tag->slug) }}">{{ $tag->name }}</a>
         @endforeach
+
+        <div class="media my-3">
+            {{-- {{ $post->author->gravatar() }} --}}
+            <img src="" class="rounded-circle mr-3" width="60">
+            <div class="media-body">
+                <div>
+                {{ $post->author->name }}
+                </div>
+                {{ '@' . $post->author->username }}
+            </div>
+        </div>
     </div>
     <small> <i class="fa fa-user">&nbsp;</i>{{ $post->author->name }}<br>
         <i class="fa fa-calendar"></i>&nbsp;Published on {{ $post->created_at }} &nbsp; <i
             class="fa fa-instagram-square"></i> </small>
     <hr>
-    <p>{{ $post->body }}</p>
+    <p>{!! nl2br($post->body) !!}</p>
     <div>
         @can('delete', $post)
-        <button type="button" class="btn btn-link btn-sm text-danger p-0" data-toggle="modal"
-            data-target="#exampleModal">
-            delete
-        </button>
+        <div class="d-flex mt-3">
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">
+                delete
+            </button>
+            &nbsp;&nbsp;
+            <a href="/posts/{{ $post->slug }}/edit" class="btn btn-sm btn-warning">edit</a>
+        </div>
+
         <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
             <div class="modal-dialog">
                 <div class="modal-content">
